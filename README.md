@@ -35,6 +35,17 @@ Online learning institutions often discover struggling students only after a mis
 
 Given the near-balanced target, F1, Precision, and Recall were prioritized over raw accuracy. XGBoost improved mainly on precision (fewer false alarms) while matching the baseline's recall. This suggests the engineered features carry a strong, largely linear signal, with the ensemble refining the decision boundary rather than uncovering entirely new patterns.
 
+## Early Detection Performance
+
+To directly answer how early the model can flag risk, a separate model was trained using only data available in the first 8 weeks (demographics plus early engagement), excluding full-course features such as total clicks or average score.
+
+| Model | Features | F1-Score |
+|---|---|---|
+| XGBoost (full course) | All features | 0.92 |
+| XGBoost (first 8 weeks only) | Demographics and early engagement | 0.73 |
+
+The early model performs meaningfully above random guessing, confirming that actionable risk signals exist well before the course midpoint, though accuracy naturally improves as more course data becomes available.
+
 ## Interpretability (SHAP)
 
 ![SHAP summary plot](shap_summary.png)
